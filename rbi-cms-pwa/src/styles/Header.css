@@ -1,53 +1,42 @@
-/* ===== Palette (figma-ish) ===== */
 :root {
-  --aqua: #e8f6f6; /* header background */
-  --teal: #006d69; /* primary */
+  --aqua: #e8f6f6;
+  --teal: #006d69;
   --teal-600: #0a7f7a;
-  --ink: #113032; /* text on aqua */
+  --ink: #113032;
   --muted: #5c6b6c;
   --line: #dbe8e8;
   --menu-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
 }
-
-/* ===== Header bar ===== */
 .cms-header {
   background: var(--aqua);
   color: var(--ink);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: clamp(10px, 1.8vw, 14px) clamp(200px, 3vw, 280px);
+  padding: 12px 360px;
   gap: 12px;
   border-bottom: 1px solid var(--line);
 }
-
 .hdr-left {
   display: flex;
   align-items: center;
   gap: 10px;
-  /* padding: 0 clamp(70px, 3vw, 80px); */
 }
 .hdr-logo {
   width: clamp(120px, 16vw, 190px);
   height: auto;
 }
-
-/* Right cluster */
 .hdr-right {
   display: flex;
   align-items: center;
   gap: clamp(10px, 2vw, 18px);
 }
-
-/* controls: Dark mode, English, Help */
 .hdr-controls {
   display: flex;
   align-items: center;
   gap: clamp(10px, 1.6vw, 16px);
   color: var(--ink);
 }
-
-/* switch (purely visual) */
 .toggle {
   display: flex;
   align-items: center;
@@ -59,11 +48,15 @@
 .switch {
   width: 42px;
   height: 24px;
-  background: #ccd5d5;
+  background: #9ea3a3;
   border-radius: 999px;
   position: relative;
   border: none;
   cursor: pointer;
+  transition: background 0.3s;
+}
+.switch.on {
+  background: #333;
 }
 .switch .knob {
   position: absolute;
@@ -73,9 +66,11 @@
   height: 18px;
   background: #fff;
   border-radius: 50%;
+  transition: left 0.3s;
 }
-
-/* Basics */
+.switch.on .knob {
+  left: 21px;
+}
 .plain-btn {
   background: transparent;
   border: none;
@@ -83,6 +78,8 @@
   font-weight: 400;
   cursor: pointer;
   font-size: 16px;
+  align-content: center;
+  margin-top: -8px;
 }
 .plain-link {
   color: #00696e;
@@ -95,10 +92,8 @@
 }
 .dropdown .caret {
   margin-left: 4px;
-  font-size: 12px;
+  font-size: 25px;
 }
-
-/* Auth buttons */
 .auth {
   display: flex;
   align-items: center;
@@ -126,8 +121,43 @@
 .btn.teal:hover {
   background: var(--teal-600);
 }
-
-/* Logged-in cluster */
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+.plain-btn.dropdown {
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.caret {
+  margin-left: 6px;
+}
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-top: 4px;
+  list-style: none;
+  padding: 4px 0;
+  min-width: 120px;
+  z-index: 100;
+}
+.dropdown-item {
+  width: 100%;
+  padding: 6px 12px;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.dropdown-item:hover {
+  background: #f0f0f0;
+}
 .logged-in {
   display: flex;
   align-items: center;
@@ -157,8 +187,6 @@
 .logout-link:hover {
   text-decoration: underline;
 }
-
-/* Menu */
 .user-menu {
   position: absolute;
   right: 0;
@@ -203,9 +231,6 @@
   width: 18px;
   text-align: center;
 }
-
-/*  Buttons */
-
 .btn-style1 {
   width: clamp(110px, 28vw, 129px);
   height: 44px;
@@ -236,16 +261,31 @@
   border: none;
   color: #fff;
 }
-
-/* =========================
-   Responsive overrides ONLY
-   (no original values touched)
-   ========================= */
-
-/* 1) Ease the huge side padding on wide → mid screens */
+.headerSearch {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background-color: #ffffff99;
+  border-radius: 8px;
+  padding: 4px 8px;
+  gap: 6px;
+  width: 233px;
+  height: 40px;
+}
+.headerSearch img {
+  width: 16px;
+  height: 16px;
+}
+.headerSearch input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+}
 @media (max-width: 1600px) {
   .cms-header {
-    padding: clamp(10px, 1.8vw, 14px) clamp(60px, 4vw, 80px);
+    padding: 12px 160px;
   }
 }
 @media (max-width: 1280px) {
@@ -253,8 +293,6 @@
     padding: clamp(10px, 1.8vw, 14px) clamp(28px, 4vw, 56px);
   }
 }
-
-/* 2) Allow the right cluster to wrap cleanly */
 @media (max-width: 1100px) {
   .cms-header {
     flex-wrap: wrap;
@@ -282,85 +320,77 @@
     order: 2;
   }
 }
-
-/* 3) Compress controls and let buttons shrink on tablets */
 @media (max-width: 900px) {
   .hdr-controls {
     gap: 10px;
-  }
-  .toggle span {
-    /* keep the switch visible, hide label to save width */
-    display: none;
   }
   .plain-btn,
   .plain-link {
     white-space: nowrap;
   }
-
-  /* Let the two auth buttons use natural width instead of fixed */
   .btn-style1,
   .btn-style2 {
     width: auto;
     padding-inline: 14px;
   }
 }
-
-/* 4) Phone layout: split into two rows, right side items align end */
 @media (max-width: 640px) {
   .cms-header {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 10px 16px;
+    gap: 12px;
   }
-
-  .hdr-right {
-    justify-content: space-between;
-    gap: 10px;
-  }
-
-  .hdr-controls {
+  .hdr-left {
     flex: 1 1 100%;
-    justify-content: flex-start;
-  }
-
-  .auth {
-    width: 100%;
-    justify-content: flex-end;
+    justify-content: center;
     gap: 8px;
   }
-
-  .btn.outline,
-  .btn.teal {
-    padding: 10px 14px;
+  .hdr-right {
+    flex: 1 1 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
   }
-
-  .btn-style1,
-  .btn-style2 {
-    height: 44px; /* preserve height per your spec */
+  .hdr-controls {
+    flex: unset;
+    width: 100%;
+    justify-content: center;
+    gap: 16px;
   }
-
+  .auth,
   .logged-in {
     width: 100%;
-    justify-content: flex-end;
+    justify-content: center;
+    gap: 10px;
+  }
+  .btn-style1,
+  .btn-style2 {
+    width: auto;
+    min-width: 120px;
+    padding-inline: 14px;
   }
 }
 
-/* 5) Very small phones: keep logo readable, prevent overflow */
 @media (max-width: 380px) {
   .hdr-logo {
-    width: 120px;
+    width: 100px;
   }
-  .hdr-controls .dropdown,
-  .hdr-controls .plain-link {
+  .headerSearch {
+    width: 100%;
+    max-width: 240px;
+  }
+  .hdr-controls {
+    gap: 8px;
+  }
+  .plain-btn,
+  .plain-link {
     font-size: 14px;
   }
-  .logout-link {
-    font-weight: 700;
-  }
-}
-
-/* 6) Ensure menus never overflow the viewport on small screens */
-@media (max-width: 360px) {
-  .user-menu {
-    right: 8px;
-    width: calc(100vw - 16px);
+  .btn-style1,
+  .btn-style2 {
+    font-size: 16px;
+    min-width: 100px;
   }
 }
