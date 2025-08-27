@@ -1,0 +1,435 @@
+/* ---------- Theme ---------- */
+:root {
+  --teal: #006d69;
+  --teal-700: #0a7f7a;
+  --ink: #0f172a;
+  --muted: #667085;
+  --bg: #edf5f5;
+  --panel: #ffffff;
+  --line: #e6eaee;
+  --head-bg: #f4fafa;
+
+  /* overlap distance between hero and panel */
+  --overlap: 140px;
+}
+
+/* ---------- Page shell ---------- */
+.dash {
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  position: relative;
+  min-height: clamp(300px, 36vw, 460px);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right center;
+  isolation: isolate;
+  padding-bottom: var(--overlap); /* reserve space to overlap */
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero__topbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 6px;
+  z-index: 1;
+  opacity: 0.9;
+}
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(18px, 3vw, 24px);
+  padding-top: clamp(28px, 6vw, 48px);
+}
+.hero__hello {
+  margin: 0 0 6px;
+  font-size: clamp(14px, 1.7vw, 16px);
+  opacity: 0.9;
+}
+.hero__title {
+  margin: 0 0 18px;
+  font-weight: 700;
+  font-size: clamp(28px, 5.2vw, 56px);
+  line-height: 1.05;
+}
+
+/* stacked buttons (second below first) */
+.hero__actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.hero__actions--stack {
+  flex-direction: column;
+  width: fit-content;
+}
+.btn-wide {
+  width: clamp(240px, 30vw, 320px);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  border-radius: 999px;
+  height: 48px;
+  padding: 0 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+}
+.btn-lg {
+  height: 52px;
+  padding: 0 24px;
+}
+.btn-teal {
+  background: var(--teal);
+  color: #fff;
+}
+.btn-teal:hover {
+  background: var(--teal-700);
+}
+
+/* visible white outline */
+.btn-outline-light {
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+}
+.btn-outline-light:hover {
+  border-color: #fff;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+.plus {
+  font-size: 18px;
+  line-height: 0;
+}
+
+/* ---------- Overlap wrapper ---------- */
+.wrap {
+  max-width: 1120px;
+  margin: calc(var(--overlap) * -1) auto 0; /* pull up in layout (no transform) */
+  padding: 0 clamp(12px, 2vw, 24px) 24px;
+  position: relative;
+  z-index: 2;
+}
+.wrap__title {
+  color: #fff; /* title sits over hero edge like design */
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 400;
+  margin: 0 0 12px;
+}
+
+/* ---------- Panel & Empty state ---------- */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  margin-bottom: 24px; /* keeps FAQ tight but breathing */
+}
+.empty {
+  padding: clamp(18px, 4vw, 26px);
+}
+.empty__inner {
+  margin: 0 auto;
+  max-width: 780px;
+  min-height: clamp(160px, 24vw, 220px);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 12px;
+}
+.empty__inner h3 {
+  margin: 0;
+  font-size: clamp(18px, 2.4vw, 22px);
+  color: var(--ink);
+}
+.empty__inner p {
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(13px, 1.8vw, 15px);
+}
+
+/* ---------- Complaint Cards ---------- */
+.complaints-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 18px;
+}
+.complaint-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+}
+.complaint-head {
+  background: var(--head-bg);
+  border-bottom: 1px solid var(--line);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.ch-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.doc-icon {
+  color: var(--teal);
+  flex: 0 0 auto;
+}
+.ch-title {
+  min-width: 0;
+}
+.ch-line1 {
+  font-weight: 600;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ch-sub {
+  color: #8793a0;
+  font-size: 13px;
+  margin-top: 2px;
+}
+.dl-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #e7f3f3;
+  color: var(--teal);
+  border: none;
+}
+.dl-btn:hover {
+  filter: brightness(0.97);
+}
+.complaint-body {
+  padding: 16px;
+  display: grid;
+  gap: 10px;
+}
+.status-label {
+  font-weight: 600;
+}
+.status-meta {
+  color: #6b7280;
+  font-weight: 500;
+  margin-left: 4px;
+}
+.complaint-desc,
+.complaint-note {
+  color: #374151;
+}
+.complaint-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+.primary-pill,
+.outline-pill {
+  height: 44px;
+  padding: 0 20px;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+}
+.primary-pill {
+  background: var(--teal);
+  color: #fff;
+  border: none;
+}
+.primary-pill:hover {
+  background: var(--teal-700);
+}
+.outline-pill {
+  background: #fff;
+  border: 2px solid #b4c0c9;
+  color: #222;
+}
+
+/* ---------- FAQs ---------- */
+.dash-section {
+  max-width: 1120px;
+  margin: 0 auto 20px;
+  padding: 0 clamp(12px, 2vw, 24px);
+}
+.dash-sec-title {
+  margin: 12px 0;
+  color: #1d1b20;
+  font-size: 28px;
+  font-weight: 400;
+}
+.faq-list {
+  display: grid;
+  gap: 10px;
+}
+.faq-item {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.faq-q {
+  width: 100%;
+  text-align: left;
+  background: #fff;
+  border: none;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.faq-a {
+  padding: 12px 14px 10px 30px;
+  margin: 10px;
+  color: #374151;
+  border-top: 1px solid #eef0f2;
+  display: none;
+  background: #f4fafa;
+}
+.faq-item.open .faq-a {
+  display: block;
+}
+.faq-icon {
+  color: #6b7280;
+}
+
+/* ===== Helpful Articles ===== */
+.help-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.help-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  min-height: 230px;
+}
+
+.help-thumb {
+  height: 120px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #f3f4f6, #e5e7eb);
+}
+
+.help-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink);
+  min-height: 40px;
+}
+
+.help-cta {
+  justify-self: start;
+}
+
+/* button variants reused for articles */
+.btn.outline.btn-style {
+  background: var(--teal);
+  color: #fff;
+  width: 10pc;
+  justify-self: end;
+}
+.btn-sm {
+  height: 38px;
+  padding: 0 14px;
+  font-weight: 600;
+}
+.btn-outline-dark {
+  background: #fff;
+  color: var(--ink);
+  border: 2px solid #cbd5e1;
+  transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+}
+.btn-outline-dark:hover {
+  border-color: #94a3b8;
+  background: #f8fafc;
+}
+
+/* Helpful Articles responsiveness */
+@media (max-width: 520px) {
+  .help-thumb {
+    height: 100px;
+  }
+}
+
+/* ---------- Responsiveness ---------- */
+@media (max-width: 960px) {
+  :root {
+    --overlap: 110px;
+  }
+  .complaints-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+@media (max-width: 720px) {
+  :root {
+    --overlap: 80px;
+  }
+  .hero {
+    background-position: 75% center;
+  }
+  .btn,
+  .btn-lg {
+    height: 46px;
+  }
+  .btn-wide {
+    width: clamp(220px, 60vw, 320px);
+  }
+}
+@media (max-width: 520px) {
+  :root {
+    --overlap: 60px;
+  }
+  .hero {
+    min-height: 300px;
+    background-position: 68% center;
+  }
+  .empty__inner {
+    min-height: 180px;
+  }
+  .complaints-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,366 @@
+/* ===== Palette (figma-ish) ===== */
+:root {
+  --aqua: #e8f6f6; /* header background */
+  --teal: #006d69; /* primary */
+  --teal-600: #0a7f7a;
+  --ink: #113032; /* text on aqua */
+  --muted: #5c6b6c;
+  --line: #dbe8e8;
+  --menu-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== Header bar ===== */
+.cms-header {
+  background: var(--aqua);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(10px, 1.8vw, 14px) clamp(200px, 3vw, 280px);
+  gap: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.hdr-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* padding: 0 clamp(70px, 3vw, 80px); */
+}
+.hdr-logo {
+  width: clamp(120px, 16vw, 190px);
+  height: auto;
+}
+
+/* Right cluster */
+.hdr-right {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 2vw, 18px);
+}
+
+/* controls: Dark mode, English, Help */
+.hdr-controls {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.6vw, 16px);
+  color: var(--ink);
+}
+
+/* switch (purely visual) */
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 400;
+  color: #00696e;
+  font-size: 16px;
+}
+.switch {
+  width: 42px;
+  height: 24px;
+  background: #ccd5d5;
+  border-radius: 999px;
+  position: relative;
+  border: none;
+  cursor: pointer;
+}
+.switch .knob {
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+/* Basics */
+.plain-btn {
+  background: transparent;
+  border: none;
+  color: #00696e;
+  font-weight: 400;
+  cursor: pointer;
+  font-size: 16px;
+}
+.plain-link {
+  color: #00696e;
+  font-weight: 400;
+  text-decoration: none;
+  font-size: 16px;
+}
+.plain-link:hover {
+  text-decoration: underline;
+}
+.dropdown .caret {
+  margin-left: 4px;
+  font-size: 12px;
+}
+
+/* Auth buttons */
+.auth {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.btn {
+  border-radius: 999px;
+  padding: 9px 16px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+.btn.outline {
+  background: transparent;
+  color: var(--teal);
+  border-color: var(--teal);
+}
+.btn.outline:hover {
+  background: rgba(0, 109, 105, 0.08);
+}
+.btn.teal {
+  background: var(--teal);
+  color: #fff;
+}
+.btn.teal:hover {
+  background: var(--teal-600);
+}
+
+/* Logged-in cluster */
+.logged-in {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.avatar-wrap {
+  position: relative;
+}
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: none;
+  background: var(--teal);
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+}
+.logout-link {
+  background: transparent;
+  border: none;
+  color: var(--teal);
+  font-weight: 700;
+  cursor: pointer;
+}
+.logout-link:hover {
+  text-decoration: underline;
+}
+
+/* Menu */
+.user-menu {
+  position: absolute;
+  right: 0;
+  top: 48px;
+  width: 220px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--menu-shadow);
+  overflow: hidden;
+  z-index: 10;
+}
+.user-menu-hd {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+  background: #f6fbfb;
+}
+.user-name {
+  font-weight: 700;
+  color: var(--ink);
+}
+.user-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  padding: 10px 12px;
+  font-weight: 600;
+  color: #1f2a2a;
+  cursor: pointer;
+}
+.user-menu-item:hover {
+  background: #f2f7f7;
+}
+.user-menu-item.danger {
+  color: #b42318;
+}
+.user-menu .ico {
+  width: 18px;
+  text-align: center;
+}
+
+/*  Buttons */
+
+.btn-style1 {
+  width: clamp(110px, 28vw, 129px);
+  height: 44px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #6c797b;
+  color: #016971;
+}
+.btn-style2 {
+  width: clamp(120px, 28vw, 147px);
+  height: 44px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: #006971;
+  border: none;
+  color: #fff;
+}
+
+/* =========================
+   Responsive overrides ONLY
+   (no original values touched)
+   ========================= */
+
+/* 1) Ease the huge side padding on wide → mid screens */
+@media (max-width: 1600px) {
+  .cms-header {
+    padding: clamp(10px, 1.8vw, 14px) clamp(60px, 4vw, 80px);
+  }
+}
+@media (max-width: 1280px) {
+  .cms-header {
+    padding: clamp(10px, 1.8vw, 14px) clamp(28px, 4vw, 56px);
+  }
+}
+
+/* 2) Allow the right cluster to wrap cleanly */
+@media (max-width: 1100px) {
+  .cms-header {
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+  .hdr-left {
+    flex: 0 0 auto;
+    min-width: 0;
+  }
+  .hdr-right {
+    flex: 1 1 100%;
+    min-width: 0;
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+  }
+  .hdr-controls {
+    order: 1;
+    flex: 1 1 auto;
+    min-width: 260px;
+  }
+  .auth,
+  .logged-in {
+    order: 2;
+  }
+}
+
+/* 3) Compress controls and let buttons shrink on tablets */
+@media (max-width: 900px) {
+  .hdr-controls {
+    gap: 10px;
+  }
+  .toggle span {
+    /* keep the switch visible, hide label to save width */
+    display: none;
+  }
+  .plain-btn,
+  .plain-link {
+    white-space: nowrap;
+  }
+
+  /* Let the two auth buttons use natural width instead of fixed */
+  .btn-style1,
+  .btn-style2 {
+    width: auto;
+    padding-inline: 14px;
+  }
+}
+
+/* 4) Phone layout: split into two rows, right side items align end */
+@media (max-width: 640px) {
+  .cms-header {
+    padding: 10px 16px;
+  }
+
+  .hdr-right {
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .hdr-controls {
+    flex: 1 1 100%;
+    justify-content: flex-start;
+  }
+
+  .auth {
+    width: 100%;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  .btn.outline,
+  .btn.teal {
+    padding: 10px 14px;
+  }
+
+  .btn-style1,
+  .btn-style2 {
+    height: 44px; /* preserve height per your spec */
+  }
+
+  .logged-in {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+/* 5) Very small phones: keep logo readable, prevent overflow */
+@media (max-width: 380px) {
+  .hdr-logo {
+    width: 120px;
+  }
+  .hdr-controls .dropdown,
+  .hdr-controls .plain-link {
+    font-size: 14px;
+  }
+  .logout-link {
+    font-weight: 700;
+  }
+}
+
+/* 6) Ensure menus never overflow the viewport on small screens */
+@media (max-width: 360px) {
+  .user-menu {
+    right: 8px;
+    width: calc(100vw - 16px);
+  }
+}

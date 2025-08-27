@@ -1,0 +1,45 @@
+.footer {
+  background-color: #e8f6f6;
+  color: #016971;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+  padding: 40px 24px 24px 70px;
+}
+
+.footer a {
+  color: #016971;
+  text-decoration: underline;
+  display: block;
+  margin-bottom: 25px;
+}
+
+.footer p {
+  font-size: 20px;
+  opacity: 0.9;
+  margin-top: 8px;
+}
+
+.rbi-footer-logo {
+  max-width: 240px;
+}
+
+/* Responsive */
+@media (max-width: 1040px) {
+  .footer {
+    padding-left: 32px;
+  }
+}
+
+@media (max-width: 900px) {
+  .footer {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 540px) {
+  .footer {
+    grid-template-columns: 1fr;
+    padding-left: 24px;
+  }
+}
