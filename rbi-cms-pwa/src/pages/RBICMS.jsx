@@ -21,7 +21,7 @@ import RBI_bg from "../assets/images/RBI_bg.png";
 import Download_Icon from "../assets/images/download_icon.svg";
 import Ombuds_Scheme_Icon from "../assets/images/ombuds_scheme_icon.svg";
 import Address_Icon from "../assets/images/address_icon.svg";
-
+import dashboardCall from "../assets/images/dashboardCall.png";
 export default function RBICMS() {
   const [popup, setPopup] = useState(null); // "login" | "signup" | "phone" | "otp"
   const [identity, setIdentity] = useState({
@@ -187,7 +187,7 @@ export default function RBICMS() {
           </section>
         </section>
       </main>
-
+      <img src={dashboardCall} className="callImageStyle" />
       {/* Popups */}
       {popup === "login" && (
         <LoginPopup
