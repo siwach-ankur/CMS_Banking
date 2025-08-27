@@ -1,29 +1,32 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { color, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Button } from "../components/ui/button";
 import "../styles/RBICMS.css";
 
-// Cards
 import QuickTile from "../components/QuickTile";
 import ArticleCard from "../components/ArticleCard";
 import VideoCard from "../components/VideoCard";
 
-// Popups
 import LoginPopup from "../components/Popups/LoginPopup";
 import SignupPopup from "../components/Popups/SignupPopup";
 import PhonePopup from "../components/Popups/PhonePopup";
 import OtpPopup from "../components/Popups/OtpPopup";
 
-// Assets
 import RBI_bg from "../assets/images/RBI_bg.png";
 import Download_Icon from "../assets/images/download_icon.svg";
 import Ombuds_Scheme_Icon from "../assets/images/ombuds_scheme_icon.svg";
 import Address_Icon from "../assets/images/address_icon.svg";
 import dashboardCall from "../assets/images/dashboardCall.png";
+import DashboardCallMobile from "../assets/images/DashboardCallMobile.png";
+import arrow from "../assets/images/arrow.svg";
+import backArrow from "../assets/images/backArrow.svg";
+import sampleImage from "../assets/images/sampleImage.png";
+import infoIcons from "../assets/images/infoIcons.svg";
+
 export default function RBICMS() {
-  const [popup, setPopup] = useState(null); // "login" | "signup" | "phone" | "otp"
+  const [popup, setPopup] = useState(null);
   const [identity, setIdentity] = useState({
     name: "",
     phone: "",
@@ -31,12 +34,9 @@ export default function RBICMS() {
   });
   const [activeTab, setActiveTab] = useState("File a New Complaint");
 
-  const closePopup = useCallback(() => setPopup(null), []);
-
   const { setUser } = useAuth();
   const navigate = useNavigate();
 
-  // handle success login/signup/otp
   const completeLogin = (name) => {
     setUser({ name });
     setPopup(null);
@@ -45,7 +45,6 @@ export default function RBICMS() {
 
   return (
     <div className="rbicms-container">
-      {/* Hero with background image */}
       <section
         aria-labelledby="hero-heading"
         className="relative border-b bg-cover bg-center"
@@ -123,7 +122,6 @@ export default function RBICMS() {
           </div>
         </div>
       </section>
-      {/* Advisory strip (replace your current DIV with this) */}
       <div className="advisory">
         <span className="advisory-item">
           Avoid banking through public, open or free networks.
@@ -132,63 +130,102 @@ export default function RBICMS() {
           The Contact Center with Toll Free #14448 is available 24x7.
         </span>
       </div>
-
-      {/* Main */}
-      <main className="main" role="main">
-        <aside className="sidebar" aria-label="Quick actions">
-          <QuickTile
-            title="File a complaint offline by downloading our printable form below!"
-            desc=""
-            cta="Download Form"
-            icon={Download_Icon}
-          />
-          <QuickTile
-            title="Reserve Bank Integrated Ombudsman scheme, 2021"
-            desc="Know your rights and protections."
-            cta="View Details"
-            icon={Ombuds_Scheme_Icon}
-          />
-          <QuickTile
-            title="Address of Centralised Receipt and Processing Centre"
-            desc="Find the official correspondence address."
-            cta="View Details"
-            icon={Address_Icon}
-          />
-        </aside>
-
-        <section className="content">
-          <section aria-labelledby="articles-heading" className="section">
-            <div className="section-head">
-              <h2 id="articles-heading">Articles to Assist You</h2>
+      <div className="learnStyle">
+        <h3>What you can complain about</h3>
+        <div className="moreInfo">
+          You can approach RBI if your bank, NBFC, or payment service provider
+          fails to resolve your concern within 30 days. Common issues include:
+        </div>
+        <div className="wholeBox">
+          <div className="complainBox">
+            <div className="complainBoxHeading">
+              <img src={infoIcons} />
+              <h5>Banking Services</h5>
             </div>
-            <div className="grid">
-              <ArticleCard
-                title="Steps to file a complaint"
-                subtitle="How to file a complaint"
-              />
-              <ArticleCard
-                title="Steps to track a complaint"
-                subtitle="How to track your complaint"
-              />
-              <ArticleCard
-                title="Steps to file an appeal"
-                subtitle="How to file an appeal"
-              />
+            <h4>Account opening or closure delays</h4>
+            <h4>Non-adherence to interest rates or deposit terms</h4>
+            <h4>Unfair charges or fees</h4>
+            <h4>ATM, cheque, or cash handling problems</h4>
+          </div>
+          <div className="complainBox whiteColor">
+            <div className="complainBoxHeading">
+              <img src={infoIcons} />
+              <h5>Banking Services</h5>
             </div>
-          </section>
-
-          <section aria-labelledby="videos-heading" className="section">
-            <h2 id="videos-heading">Education and Awareness Videos</h2>
-            <div className="grid">
-              <VideoCard title="Basic Savings Bank Deposit Account" />
-              <VideoCard title="Customer Liability in Unauthorised Electronic Banking Transactions" />
-              <VideoCard title="Safe Digital Banking" />
+            <h4>Account opening or closure delays</h4>
+            <h4>Non-adherence to interest rates or deposit terms</h4>
+            <h4>Unfair charges or fees</h4>
+            <h4>ATM, cheque, or cash handling problems</h4>
+          </div>
+          <div className="complainBox">
+            <div className="complainBoxHeading">
+              <img src={infoIcons} />
+              <h5>Banking Services</h5>
             </div>
-          </section>
-        </section>
-      </main>
-      <img src={dashboardCall} className="callImageStyle" />
-      {/* Popups */}
+            <h4>Account opening or closure delays</h4>
+            <h4>Non-adherence to interest rates or deposit terms</h4>
+            <h4>Unfair charges or fees</h4>
+            <h4>ATM, cheque, or cash handling problems</h4>
+          </div>
+          <div className="complainBox whiteColor">
+            <div className="complainBoxHeading">
+              <img src={infoIcons} />
+              <h5>Banking Services</h5>
+            </div>
+            <h4>Account opening or closure delays</h4>
+            <h4>Non-adherence to interest rates or deposit terms</h4>
+            <h4>Unfair charges or fees</h4>
+            <h4>ATM, cheque, or cash handling problems</h4>
+          </div>
+        </div>
+      </div>
+      <div className="learnStyle">
+        <div className="headingView">
+          <h3>Learning centre</h3>
+          <div>
+            <button className="btn outline ">
+              <img src={backArrow} />
+            </button>
+            <button className="btn primary btn-style ">
+              <img src={arrow} />
+            </button>
+          </div>
+        </div>
+        <div className="imageView">
+          <div>
+            <img src={sampleImage} className="imageStyle" />
+            <p>How to file a complaint?</p>
+          </div>
+          <div>
+            <img src={sampleImage} className="imageStyle" />
+            <p>How do I track my complaints?</p>
+          </div>
+          <div>
+            <img src={sampleImage} className="imageStyle" />
+            <p>Basic savings Bank deposit account</p>
+          </div>
+          <div>
+            <img src={sampleImage} className="imageStyle" />
+            <p>
+              Customer Liability in Unauthorised Electronic Banking Transactions
+            </p>
+          </div>
+          <div>
+            <img src={sampleImage} className="imageStyle" />
+            <p>
+              Customer Liability in Unauthorised Electronic Banking Transactions
+            </p>
+          </div>
+        </div>
+      </div>
+      <picture>
+        <source
+          srcSet={DashboardCallMobile}
+          className="callImageStyleMobile"
+          media="(max-width: 800px)"
+        />
+        <img src={dashboardCall} className="callImageStyle" alt="Dashboard" />
+      </picture>
       {popup === "login" && (
         <LoginPopup
           onClose={() => setPopup(null)}
