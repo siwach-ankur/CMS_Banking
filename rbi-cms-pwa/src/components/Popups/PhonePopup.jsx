@@ -28,6 +28,7 @@ export default function PhonePopup({ onClose, identity, setIdentity, onNext }) {
             value={identity.name}
             onChange={update("name")}
             autoFocus
+            required
           />
 
           <div className="inline">
@@ -46,16 +47,17 @@ export default function PhonePopup({ onClose, identity, setIdentity, onNext }) {
               placeholder="Enter Phone Number"
               value={identity.phone}
               onChange={update("phone")}
+              required
             />
           </div>
         </div>
 
         <div className="pop-actions">
-          <button className="btn outline btn-style" onClick={onClose}>
+          <button className="closeButton" onClick={onClose}>
             Back
           </button>
           <button
-            className="btn primary btn-style"
+            className="closeButton confirmStyle"
             onClick={onNext}
             disabled={!canNext}
             aria-disabled={!canNext}

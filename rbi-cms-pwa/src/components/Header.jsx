@@ -11,6 +11,7 @@ import OtpPopup from "./Popups/OtpPopup";
 
 export default function Header() {
   const { user, setUser } = useAuth();
+  const [newUser, setNewUser] = useState(false);
   const nav = useNavigate();
   const { pathname } = useLocation();
   const [popup, setPopup] = useState(null);
@@ -72,58 +73,67 @@ export default function Header() {
       <header className="cms-header">
         <div className="hdr-left">
           <img src={RBI_Logo} alt="RBI logo" className="hdr-logo" />
-          <div className="headerSearch">
-            <img src={searchIcon} />
-            <input />
-          </div>
+          {!user && (
+            <div className="headerSearch">
+              <img src={searchIcon} />
+              <input />
+            </div>
+          )}
         </div>
 
         <div className="hdr-right">
-          <div className="hdr-controls">
-            <div className="toggle">
-              <span>Dark mode</span>
-              <button
-                className={`switch${isDark ? " on" : ""}`}
-                type="button"
-                aria-label="toggle dark mode"
-                onClick={() => setIsDark(!isDark)}
-              >
-                <span className="knob" />
-              </button>
-            </div>
-            <div className="dropdown-container">
-              <button
-                className="plain-btn dropdown"
-                type="button"
-                onClick={() => setOpen(!open)}
-              >
-                {selected} <span className="caret">▾</span>
-              </button>
+          {!user && (
+            <div className="hdr-controls">
+              <div className="toggle">
+                <span>Dark mode</span>
+                <button
+                  className={`switch${isDark ? " on" : ""}`}
+                  type="button"
+                  aria-label="toggle dark mode"
+                  onClick={() => setIsDark(!isDark)}
+                >
+                  <span className="knob" />
+                </button>
+              </div>
+              <div className="dropdown-container">
+                <button
+                  className="plain-btn dropdown"
+                  type="button"
+                  onClick={() => setOpen(!open)}
+                >
+                  {selected} <span className="caret">▾</span>
+                </button>
 
-              {open && (
-                <ul className="dropdown-menu">
-                  {languages.map((lang) => (
-                    <li key={lang}>
-                      <button
-                        className="dropdown-item"
-                        onClick={() => handleSelect(lang)}
-                      >
-                        {lang}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
+                {open && (
+                  <ul className="dropdown-menu">
+                    {languages.map((lang) => (
+                      <li key={lang}>
+                        <button
+                          className="dropdown-item"
+                          onClick={() => handleSelect(lang)}
+                        >
+                          {lang}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
 
-            <a className="plain-link" href="#help">
-              Help
-            </a>
-          </div>
+              <a className="plain-link" href="#help">
+                Help
+              </a>
+            </div>
+          )}
 
           {!user ? (
             <div className="auth">
-              <button className="btn-style2" onClick={() => setPopup("signup")}>
+              <button
+                className="btn-style2"
+                onClick={() =>
+                  newUser ? setPopup("signup") : setPopup("login")
+                }
+              >
                 Login / Sign Up
               </button>
             </div>

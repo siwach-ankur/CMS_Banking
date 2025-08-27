@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../styles/Popups.css";
 
-export default function SignupPopup({ onClose, onBack }) {
+export default function SignupPopup({ onClose, onConfirm }) {
   const [form, setForm] = useState({
     name: "Mahesh Ram Singh",
     email: "mahesh.singh@gmail.com",
@@ -12,12 +12,17 @@ export default function SignupPopup({ onClose, onBack }) {
 
   const update = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
-  const submit = () => {
+  const submit = (e) => {
+    e.preventDefault();
     if (!form.pass || form.pass !== form.confirm) {
       alert("Passwords do not match.");
       return;
     }
-    alert("Account created (demo).");
+
+    console.log("Form submitted:", form);
+
+    alert(`Account created for ${form.name} (${form.email})`);
+    onConfirm(form.name);
     onClose();
   };
 
@@ -32,52 +37,54 @@ export default function SignupPopup({ onClose, onBack }) {
         <h2>Create an account</h2>
         <p className="hint mg-top0">Enter your details to proceed.</p>
 
-        <div className="form-row">
-          <input
-            className="input"
-            placeholder="Enter Name"
-            value={form.name}
-            onChange={update("name")}
-          />
-          <input
-            className="input"
-            placeholder="Enter Email ID"
-            value={form.email}
-            onChange={update("email")}
-          />
-          <input
-            className="input"
-            placeholder="Enter Phone Number"
-            value={form.phone}
-            onChange={update("phone")}
-          />
-          <input
-            className="input"
-            type="password"
-            placeholder="Enter Password"
-            value={form.pass}
-            onChange={update("pass")}
-          />
-          <input
-            className="input"
-            type="password"
-            placeholder="Confirm Password"
-            value={form.confirm}
-            onChange={update("confirm")}
-          />
-        </div>
+        <form onSubmit={submit}>
+          <div className="form-row">
+            <input
+              className="input"
+              placeholder="Enter Name"
+              value={form.name}
+              onChange={update("name")}
+              required
+            />
+            <input
+              className="input"
+              placeholder="Enter Email ID"
+              value={form.email}
+              onChange={update("email")}
+              required
+            />
+            <input
+              className="input"
+              placeholder="Enter Phone Number"
+              value={form.phone}
+              onChange={update("phone")}
+              required
+            />
+            <input
+              className="input"
+              type="password"
+              placeholder="Enter Password"
+              value={form.pass}
+              onChange={update("pass")}
+              required
+            />
+            <input
+              className="input"
+              type="password"
+              placeholder="Confirm Password"
+              value={form.confirm}
+              onChange={update("confirm")}
+              required
+            />
+          </div>
 
-        <div className="pop-actions">
-          <button className="btn outline btn-style" onClick={onClose}>
-            Close
-          </button>
-          <button
-            className="btn primary btn-style"
-            onClick={() => alert("Logged in (demo).")}
-          >
-            Confirm
-          </button>
-        </div>
+          <div className="pop-actions">
+            <button className="closeButton" onClick={onClose}>
+              Close
+            </button>
+            <button className="closeButton confirmStyle">Confirm</button>
+          </div>
+        </form>
       </div>
     </div>
   );

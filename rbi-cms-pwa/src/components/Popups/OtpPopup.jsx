@@ -78,20 +78,19 @@ export default function OtpPopup({
           Resend code
         </button>
 
-        <div className="pop-actions space-between">
-          <button className="btn outline btn-style" onClick={onClose}>
-            Back
-          </button>
-          <button className="btn primary btn-style" onClick={verify}>
-            Continue
-          </button>
-        </div>
-
         <p className="hint policy">
           By continuing, you agree that we create an account for you (unless
           already created), and accept our Terms and Conditions and Privacy
           Policy.
         </p>
+        <div className="pop-actions space-between">
+          <button className="closeButton" onClick={onClose}>
+            Back
+          </button>
+          <button className="closeButton confirmStyle" onClick={verify}>
+            Continue
+          </button>
+        </div>
       </div>
     </div>
   );

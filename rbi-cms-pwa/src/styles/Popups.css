@@ -1,4 +1,3 @@
-/* Backdrop */
 .popup-backdrop {
   position: fixed;
   inset: 0;
@@ -10,20 +9,19 @@
   z-index: 1000;
 }
 
-/* Modal */
 .popup {
-  width: clamp(320px, 92vw, 400px); /* fluid */
+  width: clamp(320px, 92vw, 400px);
   max-width: 100%;
   background: #fff;
   border-radius: 12px;
   border: 1px solid #e5e7eb;
-  padding: clamp(18px, 3vw, 28px); /* fluid padding */
+  padding: clamp(18px, 3vw, 28px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .popup h2 {
   margin: 0 0 clamp(10px, 1.8vw, 16px);
-  font-size: clamp(22px, 3.2vw, 28px); /* fluid title */
+  font-size: clamp(22px, 3.2vw, 28px);
   line-height: 1.2;
 }
 
@@ -40,7 +38,6 @@
   color: #00000099;
 }
 
-/* Header row (label + Edit) */
 .otp-label-row {
   display: flex;
   align-items: center;
@@ -52,20 +49,19 @@
   margin: 0;
 }
 
-/* OTP Inputs: responsive squares using aspect-ratio */
 .otp-row {
   margin-top: 12px;
   display: grid;
-  grid-template-columns: repeat(6, minmax(40px, 1fr)); /* shrink gracefully */
+  grid-template-columns: repeat(6, minmax(40px, 1fr));
   gap: clamp(6px, 1.5vw, 12px);
   align-items: center;
 }
 
 .otp-box {
   width: 100%;
-  aspect-ratio: 1 / 1; /* keep square on any width */
-  max-width: clamp(40px, 8vw, 56px); /* cap size on large screens */
-  margin-inline: auto; /* center each box in its cell */
+  aspect-ratio: 1 / 1;
+  max-width: clamp(40px, 8vw, 56px);
+  margin-inline: auto;
   text-align: center;
   font-size: clamp(18px, 2.6vw, 24px);
   line-height: 1;
@@ -83,7 +79,6 @@
   box-shadow: 0 0 0 3px rgba(20, 184, 177, 0.2);
 }
 
-/* Links */
 .link {
   background: transparent;
   border: 0;
@@ -106,7 +101,6 @@
   font-size: clamp(14px, 1.8vw, 18px);
 }
 
-/* Buttons row */
 .pop-actions {
   display: flex;
   gap: 16px;
@@ -117,7 +111,6 @@
   justify-content: space-between;
 }
 
-/* Pill buttons */
 .btn-style {
   width: clamp(130px, 28vw, 160px);
   height: 44px;
@@ -147,14 +140,12 @@
   background: #0a7f7a;
 }
 
-/* Policy text */
 .policy {
   margin-top: 12px;
   font-size: clamp(13px, 1.7vw, 16px);
   color: #6b7280;
 }
 
-/* Utilities (kept) */
 .form-row {
   display: grid;
   gap: 8px;
@@ -183,8 +174,19 @@
   gap: 8px;
   align-items: center;
 }
+.closeButton {
+  color: #006971;
+  width: 160px;
+  height: 40px;
+  border: 1px solid #6c797b;
+  border-radius: 100px;
+  cursor: pointer;
+}
+.confirmStyle {
+  color: #ffffff;
+  background-color: #006971;
+}
 
-/* ---------- Small-screen niceties ---------- */
 @media (max-width: 480px) {
   .otp-label-row {
     flex-wrap: wrap;
@@ -197,9 +199,8 @@
   }
   .btn-style {
     flex: 1 1 auto;
-  } /* allow buttons to grow */
+  }
   .pop-actions {
-    flex-wrap: wrap;
     gap: 10px;
   }
   .space-between {
@@ -207,7 +208,7 @@
   }
   .btn.primary.btn-style,
   .btn.outline.btn-style {
-    width: 100%; /* full-width buttons on phones */
+    width: 100%;
     max-width: none;
   }
 }

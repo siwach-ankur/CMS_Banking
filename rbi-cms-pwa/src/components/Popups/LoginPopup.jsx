@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../../styles/Popups.css";
 
 export default function LoginPopup({
@@ -20,41 +20,51 @@ export default function LoginPopup({
             Create an account
           </span>
         </p>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (username.trim() === "") {
+              alert("Please fill the name");
+              return;
+            } else if (password.trim() === "") {
+              alert("Please fill the password");
+              return;
+            }
+            onConfirm(username, password);
+          }}
+        >
+          <div className="form-row">
+            <input
+              className="input"
+              placeholder="Enter Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+            <input
+              className="input"
+              type="password"
+              placeholder="Enter Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
 
-        <div className="form-row">
-          <input
-            className="input"
-            placeholder="Enter Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <input
-            className="input"
-            type="password"
-            placeholder="Enter Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+          <p className="hint">
+            Don’t want to create an account? <br />
+            <span className="link" onClick={onGoPhone}>
+              Proceed with name and phone number instead
+            </span>
+          </p>
 
-        <p className="hint">
-          Don’t want to create an account? <br />
-          <span className="link" onClick={onGoPhone}>
-            Proceed with name and phone number instead
-          </span>
-        </p>
-
-        <div className="pop-actions">
-          <button className="btn outline btn-style" onClick={onClose}>
-            Close
-          </button>
-          <button
-            className="btn primary btn-style"
-            onClick={() => onConfirm(username)}
-          >
-            Confirm
-          </button>
-        </div>
+          <div className="pop-actions">
+            <button className="closeButton" onClick={onClose}>
+              Close
+            </button>
+            <button className="closeButton confirmStyle">Confirm</button>
+          </div>
+        </form>
       </div>
     </div>
   );
