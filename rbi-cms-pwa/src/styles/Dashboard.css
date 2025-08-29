@@ -1,149 +1,118 @@
-/* ---------- Theme ---------- */
 :root {
   --teal: #006d69;
   --teal-700: #0a7f7a;
   --ink: #0f172a;
   --muted: #667085;
-  --bg: #edf5f5;
+  --bg: white;
   --panel: #ffffff;
   --line: #e6eaee;
   --head-bg: #f4fafa;
+  --header-bg: #e9f6f6;
 
-  /* overlap distance between hero and panel */
-  --overlap: 140px;
+  /* spacing that keeps hero clear of following panel */
+  --overlap: 120px;
+  --overlap-gap: 44px;
 }
 
-/* ---------- Page shell ---------- */
+/* ===== Base ===== */
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #1f2937;
+}
 .dash {
-  background: var(--bg);
+  background: var(--panel);
   min-height: 100vh;
 }
 
-/* ---------- HERO ---------- */
-.hero {
-  position: relative;
-  min-height: clamp(300px, 36vw, 460px);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: right center;
-  isolation: isolate;
-  padding-bottom: var(--overlap); /* reserve space to overlap */
-}
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-.hero__topbar {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 6px;
-  z-index: 1;
-  opacity: 0.9;
+/* ===== HERO ===== */
+.hero.hero--flat {
+  background: var(--header-bg);
 }
 .hero__inner {
-  position: relative;
-  z-index: 1;
-  color: #fff;
   max-width: 1120px;
   margin: 0 auto;
-  padding: clamp(18px, 3vw, 24px);
-  padding-top: clamp(28px, 6vw, 48px);
+  padding: 48px clamp(16px, 3vw, 24px);
 }
 .hero__hello {
   margin: 0 0 6px;
-  font-size: clamp(14px, 1.7vw, 16px);
+  font-size: 16px;
+  color: #0a2d2b;
   opacity: 0.9;
 }
 .hero__title {
-  margin: 0 0 18px;
-  font-weight: 700;
-  font-size: clamp(28px, 5.2vw, 56px);
-  line-height: 1.05;
+  margin: 0 0 14px;
+  font-weight: 800;
+  font-size: clamp(28px, 5vw, 44px);
+  line-height: 1.1;
+  color: #0a2d2b;
 }
-
-/* stacked buttons (second below first) */
-.hero__actions {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
+.hero__actions--pills {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
 }
-.hero__actions--stack {
-  flex-direction: column;
-  width: fit-content;
+.btn-pill {
+  border-radius: 999px;
+  height: 44px;
 }
-.btn-wide {
-  width: clamp(240px, 30vw, 320px);
-}
-
-/* ---------- Buttons ---------- */
 .btn {
   border: none;
   cursor: pointer;
   font-weight: 700;
   border-radius: 999px;
-  height: 48px;
-  padding: 0 20px;
+  height: 44px;
+  padding: 0 18px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
 }
-.btn-lg {
-  height: 52px;
-  padding: 0 24px;
-}
-.btn-teal {
-  background: var(--teal);
-  color: #fff;
-}
-.btn-teal:hover {
-  background: var(--teal-700);
-}
-
-/* visible white outline */
 .btn-outline-light {
   background-color: transparent;
-  color: #fff;
-  border: 2px solid rgba(255, 255, 255, 0.85);
-  transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+  color: #0a2d2b;
+  border: 2px solid rgba(10, 45, 43, 0.35);
 }
 .btn-outline-light:hover {
-  border-color: #fff;
-  background-color: rgba(255, 255, 255, 0.12);
+  border-color: #0a2d2b;
+  background-color: rgba(10, 45, 43, 0.06);
 }
-.plus {
-  font-size: 18px;
-  line-height: 0;
+@media (max-width: 900px) {
+  .hero__actions--pills {
+    grid-template-columns: 1fr;
+  }
 }
 
-/* ---------- Overlap wrapper ---------- */
+/* ===== “Your complaints” wrapper under hero ===== */
 .wrap {
   max-width: 1120px;
-  margin: calc(var(--overlap) * -1) auto 0; /* pull up in layout (no transform) */
+  margin: calc(var(--overlap-gap)) auto 0;
   padding: 0 clamp(12px, 2vw, 24px) 24px;
   position: relative;
   z-index: 2;
 }
 .wrap__title {
-  color: #fff; /* title sits over hero edge like design */
+  color: #0a2d2b;
   font-size: clamp(20px, 3vw, 28px);
-  font-weight: 400;
-  margin: 0 0 12px;
+  font-weight: 600;
+  margin: 80px 0 12px;
 }
 
-/* ---------- Panel & Empty state ---------- */
+/* Panel & empty state */
 .panel {
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 18px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  margin-bottom: 24px; /* keeps FAQ tight but breathing */
+  margin-bottom: 24px;
 }
 .empty {
   padding: clamp(18px, 4vw, 26px);
@@ -152,11 +121,11 @@
   margin: 0 auto;
   max-width: 780px;
   min-height: clamp(160px, 24vw, 220px);
-  border: 1px solid var(--line);
+  /* border: 1px solid var(--line); */
   border-radius: 16px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  /* align-items: center; */
   justify-content: center;
   text-align: center;
   gap: 12px;
@@ -171,8 +140,23 @@
   color: var(--muted);
   font-size: clamp(13px, 1.8vw, 15px);
 }
+.btn-teal {
+  background: var(--teal);
+  color: #fff;
+}
+.btn-teal:hover {
+  background: var(--teal-700);
+}
+.btn-lg {
+  height: 52px;
+  padding: 0 24px;
+}
+.plus {
+  font-size: 18px;
+  line-height: 0;
+}
 
-/* ---------- Complaint Cards ---------- */
+/* Complaint cards grid */
 .complaints-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -203,7 +187,7 @@
   min-width: 0;
 }
 .doc-icon {
-  color: var(--teal);
+  color: #2b8a84;
   flex: 0 0 auto;
 }
 .ch-title {
@@ -229,7 +213,7 @@
   justify-content: center;
   border-radius: 999px;
   background: #e7f3f3;
-  color: var(--teal);
+  color: #2b8a84;
   border: none;
 }
 .dl-btn:hover {
@@ -247,10 +231,6 @@
   color: #6b7280;
   font-weight: 500;
   margin-left: 4px;
-}
-.complaint-desc,
-.complaint-note {
-  color: #374151;
 }
 .complaint-actions {
   display: flex;
@@ -281,21 +261,92 @@
   color: #222;
 }
 
-/* ---------- FAQs ---------- */
-.dash-section {
+/* ===== Shared container (aligned with hero width) ===== */
+.learnStyle {
   max-width: 1120px;
-  margin: 0 auto 20px;
+  margin: 0 auto;
   padding: 0 clamp(12px, 2vw, 24px);
 }
-.dash-sec-title {
-  margin: 12px 0;
-  color: #1d1b20;
-  font-size: 28px;
+.learnStyle h3 {
+  font-size: clamp(22px, 3vw, 36px);
+  font-weight: 600;
+}
+.moreInfo {
+  font-size: 16px;
+  color: #24272d;
+}
+
+/* What you can complain about (RBICMS-style boxes) */
+.wholeBox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+.complainBox {
+  background-color: #f5fcff;
+  padding: 15px;
+  width: 250px;
+  height: 253px;
+  border-radius: 10px;
+}
+.whiteColor {
+  background-color: #ffffff;
+}
+.complainBoxHeading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.complainBox h5 {
+  color: #016971;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+.complainBox h4 {
+  font-size: 14px;
   font-weight: 400;
+  margin: 10px 0 0 15px;
+}
+
+/* ===== 50/50 area (FAQs left • Learning right) ===== */
+.dash-section {
+  max-width: 1120px;
+  margin: 0 auto 40px;
+  padding: 0 clamp(12px, 2vw, 24px);
+}
+.two-col.equal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 960px) {
+  .two-col.equal {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* FAQs */
+.faq-col {
+  display: flex;
+  flex-direction: column;
+}
+.dash-sec-title {
+  margin: 0 0 8px;
+  color: #111827;
+  font-size: clamp(22px, 3.2vw, 32px);
+  font-weight: 700;
+}
+.dash-sub {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 14px;
 }
 .faq-list {
   display: grid;
-  gap: 10px;
+  gap: 12px;
 }
 .faq-item {
   background: #fff;
@@ -308,19 +359,20 @@
   text-align: left;
   background: #fff;
   border: none;
-  padding: 12px 14px;
+  padding: 14px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-weight: 600;
   cursor: pointer;
 }
 .faq-a {
-  padding: 12px 14px 10px 30px;
-  margin: 10px;
+  padding: 12px 16px 16px;
   color: #374151;
   border-top: 1px solid #eef0f2;
   display: none;
-  background: #f4fafa;
+  background: #f8fbfb;
+  font-size: 14px;
 }
 .faq-item.open .faq-a {
   display: block;
@@ -329,107 +381,259 @@
   color: #6b7280;
 }
 
-/* ===== Helpful Articles ===== */
-.help-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 12px;
+/* Learning centre — SAME as RBICMS (arrows + horizontal cards) */
+.learn-col {
+  display: flex;
+  flex-direction: column;
 }
-
-.help-card {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 12px;
-  display: grid;
-  gap: 8px;
-  align-content: start;
-  min-height: 230px;
+.headingView {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-
-.help-thumb {
-  height: 120px;
-  border-radius: 8px;
-  background: linear-gradient(180deg, #f3f4f6, #e5e7eb);
+.lc-controls {
+  display: flex;
+  gap: 10px;
 }
-
-.help-title {
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--ink);
-  min-height: 40px;
+.btn-style {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
 }
-
-.help-cta {
-  justify-self: start;
-}
-
-/* button variants reused for articles */
 .btn.outline.btn-style {
-  background: var(--teal);
+  background: transparent;
+  border: 2px solid #d1d5db;
+  color: #111827;
+}
+.btn.outline.btn-style:hover {
+  background: #f3f4f6;
+}
+.btn.primary.btn-style {
+  background: #14b8b1;
   color: #fff;
-  width: 10pc;
-  justify-self: end;
+  border: none;
 }
-.btn-sm {
-  height: 38px;
-  padding: 0 14px;
-  font-weight: 600;
-}
-.btn-outline-dark {
-  background: #fff;
-  color: var(--ink);
-  border: 2px solid #cbd5e1;
-  transition: border-color 0.2s, background-color 0.2s, color 0.2s;
-}
-.btn-outline-dark:hover {
-  border-color: #94a3b8;
-  background: #f8fafc;
+.btn.primary.btn-style:hover {
+  background: #10a6a1;
 }
 
-/* Helpful Articles responsiveness */
-@media (max-width: 520px) {
-  .help-thumb {
-    height: 100px;
+/* Horizontal rail (two cards visible on wide screens, scroll on small) */
+.imageView {
+  margin-top: 14px;
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
+}
+.imageView::-webkit-scrollbar {
+  display: none;
+}
+.learn-card-compact {
+  flex: 0 0 auto;
+  width: 320px;
+}
+.imageStyle {
+  height: 180px;
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+.learn-caption {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f3f43;
+  margin-top: 10px;
+  text-align: left;
+}
+
+/* Call banner */
+.callImageStyle {
+  display: block;
+  width: 1420px;
+  height: 283px;
+  object-fit: cover;
+  margin: 20px auto;
+}
+@media (max-width: 600px) {
+  .callImageStyle {
+    content: url("../assets/images/DashboardCallMobile.png");
   }
 }
 
-/* ---------- Responsiveness ---------- */
-@media (max-width: 960px) {
-  :root {
-    --overlap: 110px;
+/* ===== Responsiveness ===== */
+@media (max-width: 1020px) {
+  .learn-card-compact {
+    width: 300px;
   }
-  .complaints-grid {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+@media (max-width: 900px) {
+  .hero__actions--pills {
+    grid-template-columns: 1fr;
   }
 }
 @media (max-width: 720px) {
   :root {
-    --overlap: 80px;
+    --overlap: 90px;
+    --overlap-gap: 28px;
   }
-  .hero {
-    background-position: 75% center;
+  .learn-card-compact {
+    width: 260px;
   }
-  .btn,
-  .btn-lg {
-    height: 46px;
-  }
-  .btn-wide {
-    width: clamp(220px, 60vw, 320px);
+  .imageStyle {
+    height: 170px;
   }
 }
 @media (max-width: 520px) {
   :root {
-    --overlap: 60px;
-  }
-  .hero {
-    min-height: 300px;
-    background-position: 68% center;
-  }
-  .empty__inner {
-    min-height: 180px;
+    --overlap: 72px;
+    --overlap-gap: 24px;
   }
   .complaints-grid {
     grid-template-columns: 1fr;
   }
+  .learn-card-compact {
+    width: 220px;
+  }
+  .imageStyle {
+    height: 150px;
+  }
+}
+
+/* ===== Equal two-column block ===== */
+.dash-section {
+  max-width: 1120px;
+  margin: 0 auto 20px;
+  padding: 0 clamp(12px, 2vw, 24px);
+}
+.two-col.equal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+@media (max-width: 960px) {
+  .two-col.equal {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dash-sec-title {
+  margin: 12px 0;
+  color: #1d1b20;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+/* Left: FAQ list with own scroll, visible cards */
+.scroll-panel {
+  max-height: 520px;
+  overflow: auto;
+  padding-right: 4px;
+}
+.scroll-panel::-webkit-scrollbar {
+  width: 8px;
+}
+.scroll-panel::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 6px;
+}
+.faq-list {
+  display: grid;
+  gap: 12px;
+}
+.faq-item {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.faq-q {
+  width: 100%;
+  text-align: left;
+  background: #fff;
+  border: none;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-weight: 600;
+}
+.faq-a {
+  padding: 12px 16px 16px;
+  color: #374151;
+  border-top: 1px solid #eef0f2;
+  display: none;
+  background: #f8fbfb;
+}
+.faq-item.open .faq-a {
+  display: block;
+}
+.faq-icon {
+  color: #6b7280;
+}
+
+/* Right: Learning centre column uses grid inside */
+.headingView {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.btn-style {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+.btn.primary {
+  background: #14b8b1;
+  color: #fff;
+}
+.btn.primary:hover {
+  background: #10a6a1;
+}
+.btn.outline {
+  background: transparent;
+  border: 2px solid #d1d5db;
+  color: #111827;
+}
+.btn.outline:hover {
+  background: #f3f4f6;
+}
+
+.learn-grid {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+@media (max-width: 700px) {
+  .learn-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.learn-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.learn-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+.learn-title {
+  margin: 10px 12px 14px;
+  font-weight: 600;
+  color: #0f2831;
 }

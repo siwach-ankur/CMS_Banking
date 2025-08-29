@@ -6,11 +6,12 @@
   --line: #e6eaee;
   --bg: #f7fbfb;
   --chip: #eaf6f4;
+  --white: #ffffff;
 }
 
 /* Page shell */
 .cf2 {
-  background: var(--bg);
+  background: var(--white);
   min-height: 100vh;
 }
 
@@ -19,15 +20,18 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px clamp(12px, 2vw, 24px);
-  border-bottom: 1px solid #edf3f3;
-  background: #f1f8f8;
+  padding: 16px clamp(160px, 2vw, 200px);
+  /* border-bottom: 1px solid #edf3f3; */
+  background: var(--white);
 }
 .back-ic {
   border: none;
   background: #fff;
   border-radius: 8px;
   padding: 6px 10px;
+  height: 56px;
+  width: 56px;
+  align-self: center;
 }
 .bc {
   color: #52616b;
@@ -54,8 +58,12 @@
 }
 .cf2-title {
   margin: 0;
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 45px;
+  font-weight: 400;
+}
+.cf2-title-inside{
+   display: flex;
+   flex-direction: row;
 }
 .cf2-id-wrap {
   display: flex;
@@ -76,8 +84,8 @@
 
 /* Stepper */
 .stepper {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  /* border-top: 1px solid var(--line); */
+  /* border-bottom: 1px solid var(--line); */
   background: #fff;
 }
 .stepper-scroll {

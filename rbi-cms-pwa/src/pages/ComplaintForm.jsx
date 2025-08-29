@@ -9,6 +9,13 @@ import Step3ComplaintDetails from "../steps/Step3ComplaintDetails";
 import Step4AdditionalInfo from "../steps/Step4AdditionalInfo";
 import ReviewStep from "../steps/ReviewStep";
 
+import BackArrow from "../assets/images/back_arrow.svg";
+import Ic1 from "../assets/images/ic1_person.svg";
+import Ic2 from "../assets/images/ic2_entity.svg";
+import Ic3 from "../assets/images/ic3_enter_complaint.svg";
+import Ic4 from "../assets/images/ic4_additional.svg";
+import Ic5 from "../assets/images/ic5_review.svg";
+
 /* ------------------------ Data ------------------------ */
 const initialData = {
   // Step 1
@@ -151,11 +158,11 @@ function isStepComplete(n, d) {
 }
 
 /* ------------------------ Icons for stepper ------------------------ */
-const Ic1 = () => <span className="ic ic-user" aria-hidden />;
-const Ic2 = () => <span className="ic ic-bank" aria-hidden />;
-const Ic3 = () => <span className="ic ic-doc" aria-hidden />;
-const Ic4 = () => <span className="ic ic-plus" aria-hidden />;
-const Ic5 = () => <span className="ic ic-check" aria-hidden />;
+// const Ic1 = () => <span className="ic ic-user" aria-hidden />;
+// const Ic2 = () => <span className="ic ic-bank" aria-hidden />;
+// const Ic3 = () => <span className="ic ic-doc" aria-hidden />;
+// const Ic4 = () => <span className="ic ic-plus" aria-hidden />;
+// const Ic5 = () => <span className="ic ic-check" aria-hidden />;
 
 /* ------------------------ Step items ------------------------ */
 const stepsMeta = [
@@ -214,9 +221,6 @@ export default function ComplaintForm() {
     <div className="cf2">
       {/* Breadcrumb */}
       <nav className="cf2-breadcrumb" aria-label="Breadcrumb">
-        <button className="back-ic" aria-label="Back">
-          ←
-        </button>
         <div className="bc">Home</div>
         <div className="sep">›</div>
         <div className="bc current">Complaint form</div>
@@ -224,7 +228,18 @@ export default function ComplaintForm() {
 
       {/* Title row */}
       <div className="cf2-title-row">
-        <h1 className="cf2-title">Complaint Form</h1>
+        <div className="cf2-title-inside">
+          <button
+            className="back-ic"
+            aria-label="Back"
+            onClick={() => {
+              step != 0 ? setStep(step - 1) : "";
+            }}
+          >
+            ←
+          </button>
+          <h1 className="cf2-title">Complaint Form</h1>
+        </div>
         {HeaderRight}
       </div>
 
@@ -246,7 +261,7 @@ export default function ComplaintForm() {
                 onClick={() => goTo(id)}
                 disabled={disabled}
               >
-                <span className="step-icon">{<Icon />}</span>
+                <span className="step-icon"> <img src={Icon} /> </span>
                 <span className="step-text">
                   <span className="step-title">{title}</span>
                   <span className="step-sub">{sub}</span>

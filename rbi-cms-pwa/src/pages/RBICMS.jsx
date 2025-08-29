@@ -1,41 +1,94 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { motion } from "framer-motion";
 import { Button } from "../components/ui/button";
 import "../styles/RBICMS.css";
 
-import QuickTile from "../components/QuickTile";
-import ArticleCard from "../components/ArticleCard";
-import VideoCard from "../components/VideoCard";
-
+/* Popups */
 import LoginPopup from "../components/Popups/LoginPopup";
 import SignupPopup from "../components/Popups/SignupPopup";
 import PhonePopup from "../components/Popups/PhonePopup";
 import OtpPopup from "../components/Popups/OtpPopup";
 
-import RBI_bg from "../assets/images/RBI_bg.png";
-import Download_Icon from "../assets/images/download_icon.svg";
-import Ombuds_Scheme_Icon from "../assets/images/ombuds_scheme_icon.svg";
-import Address_Icon from "../assets/images/address_icon.svg";
+/* assets used below */
+import backArrow from "../assets/images/backArrow.svg";
+import arrow from "../assets/images/arrow.svg";
 import dashboardCall from "../assets/images/dashboardCall.png";
 import DashboardCallMobile from "../assets/images/DashboardCallMobile.png";
-import arrow from "../assets/images/arrow.svg";
-import backArrow from "../assets/images/backArrow.svg";
-import sampleImage from "../assets/images/sampleImage.png";
 import infoIcons from "../assets/images/infoIcons.svg";
+import sampleImage from "../assets/images/sampleImage.png";
+import GirlImage from "../assets/images/Girl_Image.png";
+
+/* data */
+const learningCards = [
+  { title: "How to file a complaint?", img: sampleImage },
+  { title: "How do I track my complaints?", img: sampleImage },
+  { title: "Basic savings Bank deposit account", img: sampleImage },
+  {
+    title: "Customer Liability in Unauthorised Electronic Banking Transactions",
+    img: sampleImage,
+  },
+];
+
+const complainCards = [
+  {
+    title: "Banking Services",
+    points: [
+      "Account opening or closure delays",
+      "Non-adherence to interest rates or deposit terms",
+      "Unfair charges or fees",
+      "ATM, cheque, or cash handling problems",
+    ],
+  },
+  {
+    title: "Credit Cards & Loans",
+    points: [
+      "Unauthorized or fraudulent credit card transactions",
+      "Excessive or hidden loan charges",
+      "Delay or refusal in loan disbursal",
+      "Harassment by recovery agents",
+    ],
+  },
+  {
+    title: "Digital Payments & Wallets",
+    points: [
+      "Failed UPI or mobile wallet transactions",
+      "Non-refund of failed payments",
+      "Issues with prepaid instruments (gift cards/wallets)",
+      "Delay in updating transaction status",
+    ],
+  },
+  {
+    title: "Customer Rights & Fair Practices",
+    points: [
+      "Account opening or closure delays",
+      "Non-adherence to interest rates or deposit terms",
+      "Unfair charges or fees",
+      "ATM, cheque, or cash handling problems",
+    ],
+  },
+];
 
 export default function RBICMS() {
+  const { setUser } = useAuth();
+  const navigate = useNavigate();
+
   const [popup, setPopup] = useState(null);
   const [identity, setIdentity] = useState({
     name: "",
     phone: "",
     countryCode: "+91",
   });
-  const [activeTab, setActiveTab] = useState("File a New Complaint");
+  const [activeTab, setActiveTab] = useState("");
 
-  const { setUser } = useAuth();
-  const navigate = useNavigate();
+  const listRef = useRef(null);
+  const scrollByCards = (dir = 1) => {
+    const el = listRef.current;
+    if (!el) return;
+    const amount = Math.min(el.clientWidth * 0.9, 600);
+    el.scrollBy({ left: dir * amount, behavior: "smooth" });
+  };
 
   const completeLogin = (name) => {
     setUser({ name });
@@ -43,189 +96,165 @@ export default function RBICMS() {
     navigate("/dashboard");
   };
 
+  const heroButtons = [
+    { label: "File a New Complaint", onPress: () => setPopup("login") },
+    { label: "Track my Complaint", onPress: () => {} },
+    { label: "File an Appeal", onPress: () => {} },
+    { label: "Help us Improve", onPress: () => {} },
+  ];
+
+  // Unified handler – works whether Button emits onClick or onPress
+  const handleHeroButton = (b) => {
+    setActiveTab(b.label);
+    if (typeof b.onPress === "function") b.onPress();
+  };
+
   return (
     <div className="rbicms-container">
-      <section
-        aria-labelledby="hero-heading"
-        className="relative border-b bg-cover bg-center"
-        style={{
-          backgroundImage: `
-      linear-gradient(270deg, rgba(217, 217, 217, 0) -13.62%, rgba(79, 99, 100, 0.635728) 34.34%, #002021 89.54%),
-      url(${RBI_bg})
-    `,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          opacity: 0.95,
-        }}
-      >
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
-            <div>
-              <h1
-                id="hero-heading"
-                className="text-3xl sm:text-4xl font-bold text-slate-900 text-white"
-              >
-                How can we help you today?
-              </h1>
+      {/* HERO */}
+      <section aria-labelledby="hero-heading" className="hero-landing">
+        <div className="hero-grid">
+          {/* LEFT CONTENT */}
+          <div className="hero-text">
+            <p className="hero-eyebrow">
+              Your voice matters, and RBI ensures it is heard.
+            </p>
+            <p className="hero-sub">
+              Lodge a new complaint, track its status, or appeal a decision —
+              all in one place, with guidance at every step
+            </p>
+            <h1 id="hero-heading" className="hero-question">
+              How can we help you today?
+            </h1>
+          </div>
 
-              <div className="mt-6 space-y-3">
-                {[
-                  {
-                    label: "File a New Complaint",
-                    onPress: () => {
-                      setPopup("login");
-                    },
-                  },
-                  {
-                    label: "Track my Complaint",
-                    onPress: () => {},
-                  },
-                  {
-                    label: "File an Appeal",
-                    onPress: () => {},
-                  },
-                  {
-                    label: "Help us Improve",
-                    onPress: () => {},
-                  },
-                ].map((b, idx) => (
-                  <motion.div
-                    key={b.label}
-                    initial={{ opacity: 0, x: -8 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.05 }}
-                  >
-                    <Button
-                      variant={activeTab == b.label ? "default" : "outline"}
-                      className={`w-full sm:w-auto justify-center h-11 rounded-full px-6 font-medium ${
-                        activeTab == b.label
-                          ? "bg-teal-600 hover:bg-teal-500 text-white"
-                          : "border-2 border-slate-300  bg-transparent hover:bg-slate-50"
-                      }`}
-                      style={{
-                        color: activeTab == b.label ? "white" : "#5FE8F6",
-                      }}
-                      aria-label={b.label}
-                      onPress={() => {
-                        setActiveTab(b.label);
-                        console.log("activetab", activeTab);
-                        b.onPress();
-                      }}
-                    >
-                      {b.icon}
-                      {b.label}
-                    </Button>
-                  </motion.div>
-                ))}
+          {/* RIGHT IMAGE */}
+          <div className="hero-image-wrapper">
+            <img src={GirlImage} alt="User with phone" className="hero-image" />
+
+            {/* FLOATING CHIPS */}
+            <div className="hero-floats" aria-hidden>
+              <div className="float-chip">
+                <span className="float-dot" />
+                Simple form, <b>clear steps</b>
+              </div>
+              <div className="float-chip">
+                <span className="float-dot" />
+                File in minutes, <b>track anytime</b>
               </div>
             </div>
           </div>
         </div>
+
+        {/* BUTTON ROW (HALF INSIDE, HALF OUTSIDE) */}
+        <div className="hero-pill-container">
+          <div className="hero-pill-row">
+            {heroButtons.map((b, idx) => (
+              <motion.div
+                key={b.label}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.1 }}
+              >
+                <Button
+                  type="button"
+                  variant={activeTab === b.label ? "default" : "outline"}
+                  className={`w-full sm:w-auto justify-center h-11 rounded-full px-6 font-medium ${
+                    activeTab === b.label
+                      ? "bg-teal-600 hover:bg-teal-500 text-white"
+                      : "border-2 border-slate-300 bg-transparent hover:bg-slate-50"
+                  }`}
+                  style={{ color: activeTab === b.label ? "white" : "#016971" }}
+                  aria-label={b.label}
+                  onClick={() => handleHeroButton(b)}
+                  onPress={() => handleHeroButton(b)} // <- for components using onPress
+                >
+                  {b.label}
+                </Button>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </section>
-      <div className="advisory">
-        <span className="advisory-item">
-          Avoid banking through public, open or free networks.
-        </span>
-        <span className="advisory-item">
-          The Contact Center with Toll Free #14448 is available 24x7.
-        </span>
-      </div>
-      <div className="learnStyle">
+
+      {/* What you can complain about */}
+      <div className="learnStyle after-hero">
         <h3>What you can complain about</h3>
         <div className="moreInfo">
           You can approach RBI if your bank, NBFC, or payment service provider
           fails to resolve your concern within 30 days. Common issues include:
         </div>
-        <div className="wholeBox">
-          <div className="complainBox">
-            <div className="complainBoxHeading">
-              <img src={infoIcons} />
-              <h5>Banking Services</h5>
+
+        <div className="wholeBox" role="list">
+          {complainCards.map((card, i) => (
+            <div
+              key={card.title}
+              className={`complainBox1 ${i % 2 === 1 ? "whiteColor" : ""}`}
+              role="listitem"
+            >
+              <div className="complainBoxHeading">
+                <img src={infoIcons} alt="" />
+                <h5>{card.title}</h5>
+              </div>
+              {card.points.map((p) => (
+                <h4 key={p}>{p}</h4>
+              ))}
             </div>
-            <h4>Account opening or closure delays</h4>
-            <h4>Non-adherence to interest rates or deposit terms</h4>
-            <h4>Unfair charges or fees</h4>
-            <h4>ATM, cheque, or cash handling problems</h4>
-          </div>
-          <div className="complainBox whiteColor">
-            <div className="complainBoxHeading">
-              <img src={infoIcons} />
-              <h5>Banking Services</h5>
-            </div>
-            <h4>Account opening or closure delays</h4>
-            <h4>Non-adherence to interest rates or deposit terms</h4>
-            <h4>Unfair charges or fees</h4>
-            <h4>ATM, cheque, or cash handling problems</h4>
-          </div>
-          <div className="complainBox">
-            <div className="complainBoxHeading">
-              <img src={infoIcons} />
-              <h5>Banking Services</h5>
-            </div>
-            <h4>Account opening or closure delays</h4>
-            <h4>Non-adherence to interest rates or deposit terms</h4>
-            <h4>Unfair charges or fees</h4>
-            <h4>ATM, cheque, or cash handling problems</h4>
-          </div>
-          <div className="complainBox whiteColor">
-            <div className="complainBoxHeading">
-              <img src={infoIcons} />
-              <h5>Banking Services</h5>
-            </div>
-            <h4>Account opening or closure delays</h4>
-            <h4>Non-adherence to interest rates or deposit terms</h4>
-            <h4>Unfair charges or fees</h4>
-            <h4>ATM, cheque, or cash handling problems</h4>
-          </div>
+          ))}
         </div>
       </div>
+
+      {/* Learning centre (with Prev/Next buttons) */}
       <div className="learnStyle">
         <div className="headingView">
           <h3>Learning centre</h3>
-          <div>
-            <button className="btn outline ">
-              <img src={backArrow} />
+          <div className="lc-controls">
+            <button
+              className="btn-style-backward"
+              aria-label="Previous"
+              onClick={() => scrollByCards(-1)}
+            >
+              <img src={backArrow} alt="" />
             </button>
-            <button className="btn primary btn-style ">
-              <img src={arrow} />
+            <button
+              className="btn-style-forward"
+              aria-label="Next"
+              onClick={() => scrollByCards(1)}
+            >
+              <img src={arrow} alt="" />
             </button>
           </div>
         </div>
-        <div className="imageView">
-          <div>
-            <img src={sampleImage} className="imageStyle" />
-            <p>How to file a complaint?</p>
-          </div>
-          <div>
-            <img src={sampleImage} className="imageStyle" />
-            <p>How do I track my complaints?</p>
-          </div>
-          <div>
-            <img src={sampleImage} className="imageStyle" />
-            <p>Basic savings Bank deposit account</p>
-          </div>
-          <div>
-            <img src={sampleImage} className="imageStyle" />
-            <p>
-              Customer Liability in Unauthorised Electronic Banking Transactions
-            </p>
-          </div>
-          <div>
-            <img src={sampleImage} className="imageStyle" />
-            <p>
-              Customer Liability in Unauthorised Electronic Banking Transactions
-            </p>
-          </div>
+
+        <div
+          ref={listRef}
+          className="imageView"
+          aria-label="Learning centre carousel"
+        >
+          {learningCards.map((c) => (
+            <div key={c.title}>
+              <img src={c.img} className="imageStyle" alt="" />
+              <p>{c.title}</p>
+            </div>
+          ))}
         </div>
       </div>
+
+      {/* Call banner */}
       <picture>
         <source
           srcSet={DashboardCallMobile}
           className="callImageStyleMobile"
           media="(max-width: 800px)"
         />
-        <img src={dashboardCall} className="callImageStyle" alt="Dashboard" />
+        <img
+          src={dashboardCall}
+          className="callImageStyle"
+          alt="Other ways to file a complaint"
+        />
       </picture>
+
+      {/* POPUPS */}
       {popup === "login" && (
         <LoginPopup
           onClose={() => setPopup(null)}
